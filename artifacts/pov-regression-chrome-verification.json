@@ -1,0 +1,82 @@
+{
+  "browser": "chrome",
+  "scope": "interaction/rendering smoke check",
+  "timing": "original production delays",
+  "date": "2026-10-22T08:21:37.567Z",
+  "checks": [
+    {
+      "name": "full viewport POV, four physical CRTs, inventory slots, low-res custom shader pipeline",
+      "fov": 88.90409600953879,
+      "canvas": [
+        1440,
+        900
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "buffer": [
+        960,
+        600
+      ],
+      "monitors": 4,
+      "slots": 16,
+      "seats": 4,
+      "passes": [
+        "RenderPass",
+        "OutputPass",
+        "ShaderPass"
+      ],
+      "geometries": 115,
+      "textures": 18,
+      "calls": 262
+    },
+    {
+      "name": "shotgun rotates with the platter during reload, then clears its local spin"
+    },
+    {
+      "name": "larger projection terminal, four original answers, no 2D team/inventory cards",
+      "height": 380.296875
+    },
+    {
+      "name": "real 3D inventory raycast, silhouette highlight and correct slot reindex after use"
+    },
+    {
+      "name": "magnifier, cigarette, saw and beer preserve original rules through compact shortcuts"
+    },
+    {
+      "name": "all four physical CRTs map to exact teams when viewed from opposite-seat POVs"
+    },
+    {
+      "name": "mask raycast selects fixed team and both gun/turntable turn toward it",
+      "rotor": 6.098402598020026
+    },
+    {
+      "name": "live recoil/flash, CRT HP update and automatic terminal collapse during actions"
+    },
+    {
+      "name": "all original audio nodes and added friction respect mute"
+    },
+    {
+      "name": "graphics, journal, full rules and fullscreen controls"
+    },
+    {
+      "name": "full viewport responsive layout and all four answer controls",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "full viewport responsive layout and all four answer controls",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "camera owner matches current team across all exercised UI phases"
+    },
+    {
+      "name": "zero shader compile, JS, console, HTTP or resource errors"
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

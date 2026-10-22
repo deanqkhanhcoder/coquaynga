@@ -1,0 +1,99 @@
+{
+  "browser": "chrome",
+  "timing": "original production phase durations",
+  "date": "2026-10-22T06:25:52.698Z",
+  "checks": [
+    {
+      "name": "WebGL room, physical gun, four fixed seats",
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "calls": 113,
+      "position": [
+        0,
+        1.4289881385504848,
+        0.28
+      ],
+      "geometries": 77,
+      "textures": 13
+    },
+    {
+      "name": "four items through real HUD buttons; peek/heal/saw/beer rules"
+    },
+    {
+      "name": "3D raycast selects correct team and barrel aims at its world position",
+      "dot": 0.9874404411263964
+    },
+    {
+      "name": "live shot, two HP saw damage, next team, animation sequence"
+    },
+    {
+      "name": "wrong answer forces self shot with original one HP damage"
+    },
+    {
+      "name": "blank self shot has no live flash, no damage and keeps turn"
+    },
+    {
+      "name": "physical cuffs and last-shell beer reload preserve turn and question"
+    },
+    {
+      "name": "five restarts cancel callbacks and retain one canvas, fixed GPU resource counts",
+      "canvas": 1,
+      "labels": 4,
+      "geometries": 93,
+      "textures": 13
+    },
+    {
+      "name": "mute stops every action node and ambience"
+    },
+    {
+      "name": "manual low/high graphics modes"
+    },
+    {
+      "name": "rules dialog and fullscreen toggle"
+    },
+    {
+      "name": "complete match through UI to victory",
+      "shots": 22,
+      "phase": "won",
+      "current": 0,
+      "hp": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "ammo": 2,
+      "peek": null,
+      "saw": false,
+      "shot": {
+        "actor": 0,
+        "target": 2,
+        "live": true,
+        "self": false,
+        "damage": 1,
+        "forced": false,
+        "keep": false
+      },
+      "questionCount": 22,
+      "winner": 0,
+      "round": 4
+    },
+    {
+      "name": "winner play-again resets to four living teams"
+    },
+    {
+      "name": "responsive layout with all four answers",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "responsive layout with all four answers",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "no console errors, page errors, failed resources or HTTP errors"
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

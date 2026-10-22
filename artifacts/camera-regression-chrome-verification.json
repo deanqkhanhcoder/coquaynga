@@ -1,0 +1,126 @@
+{
+  "browser": "chrome",
+  "scope": "full UI match and branch checks",
+  "timing": "original production delays",
+  "date": "2026-10-22T07:42:47.668Z",
+  "checks": [
+    {
+      "name": "full viewport POV, four physical CRTs, inventory slots, low-res custom shader pipeline",
+      "fov": 64,
+      "canvas": [
+        1440,
+        900
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "buffer": [
+        960,
+        600
+      ],
+      "monitors": 4,
+      "slots": 16,
+      "seats": 4,
+      "passes": [
+        "RenderPass",
+        "OutputPass",
+        "ShaderPass"
+      ],
+      "geometries": 127,
+      "textures": 18,
+      "calls": 284
+    },
+    {
+      "name": "shotgun rotates with the platter during reload, then clears its local spin"
+    },
+    {
+      "name": "larger projection terminal, four original answers, no 2D team/inventory cards",
+      "height": 380.296875
+    },
+    {
+      "name": "real 3D inventory raycast, silhouette highlight and correct slot reindex after use"
+    },
+    {
+      "name": "magnifier, cigarette, saw and beer preserve original rules through compact shortcuts"
+    },
+    {
+      "name": "all four physical CRT screens map to their exact team, including the first-person seat"
+    },
+    {
+      "name": "mask raycast selects fixed team and both gun/turntable turn toward it",
+      "rotor": 0.12224176299416095
+    },
+    {
+      "name": "live recoil/flash, CRT HP update and automatic terminal collapse during actions"
+    },
+    {
+      "name": "wrong answer forces self-shot and original one HP damage"
+    },
+    {
+      "name": "blank self-shot has no live effect and keeps turn"
+    },
+    {
+      "name": "physical cuffs and last-shell beer reload keep original state transitions"
+    },
+    {
+      "name": "five restarts cancel old callbacks and keep geometry/texture counts stable",
+      "geometries": 154,
+      "textures": 18
+    },
+    {
+      "name": "all original audio nodes and added friction respect mute"
+    },
+    {
+      "name": "graphics, journal, full rules and fullscreen controls"
+    },
+    {
+      "name": "complete match through original-timing UI to one winner",
+      "shots": 22,
+      "phase": "won",
+      "current": 0,
+      "hp": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "ammo": 2,
+      "peek": null,
+      "saw": false,
+      "shot": {
+        "actor": 0,
+        "target": 2,
+        "live": true,
+        "self": false,
+        "damage": 1,
+        "forced": false,
+        "keep": false
+      },
+      "questionCount": 22,
+      "winner": 0,
+      "round": 4
+    },
+    {
+      "name": "winner play-again resets all four CRTs/teams"
+    },
+    {
+      "name": "full viewport responsive layout and all four answer controls",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "full viewport responsive layout and all four answer controls",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "camera owner always matches current team across the entire UI match, items, shots and restarts"
+    },
+    {
+      "name": "zero shader compile, JS, console, HTTP or resource errors"
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

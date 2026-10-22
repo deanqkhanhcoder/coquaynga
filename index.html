@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10110f">
+  <meta name="description" content="Bốn tổ. Sáu viên đạn. Một tổ bước ra. Buckshot Roulette — phòng chơi 3D.">
+  <title>BUCKSHOT ROULETTE — Phòng 04</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./fonts.css">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
+  </script>
+</head>
+<body>
+<div class="app" data-phase="idle">
+  <main class="desk" id="desk" aria-label="Bàn chơi bát giác 3D — góc nhìn người chơi">
+    <div id="world"></div>
+    <div id="team-labels" aria-hidden="true"></div>
+    <div id="scene-overlay" aria-live="polite"></div>
+    <div id="world-status" class="world-status" role="status">ĐANG KẾT NỐI VỚI BÀN CHƠI…</div>
+  </main>
+  <header class="topbar">
+    <div class="brand">BUCKSHOT <b>ROULETTE</b><small>MULTIPLAYER / PHÒNG 04</small></div>
+    <nav class="top-actions" aria-label="Điều khiển trò chơi">
+      <button class="util" id="quality" title="Đổi độ phân giải render và chất lượng bóng">Đồ họa: tự động</button>
+      <button class="util" id="sound" aria-pressed="true"><span id="sound-label">Âm thanh: bật</span></button>
+      <button class="util" id="fullscreen">Toàn màn hình</button>
+      <button class="util replay" id="restart" disabled>↻ CHƠI LẠI</button>
+      <button class="util" id="journal-toggle" aria-expanded="false" aria-controls="journal">NHẬT KÝ</button>
+      <button class="util" id="rules-open">LUẬT CHƠI</button>
+    </nav>
+  </header>
+  <div class="turn"><span id="turn-number">—</span><div><span class="eyebrow" id="turn-label">SẴN SÀNG</span><h1 id="turn-title">CHỜ BẮT ĐẦU</h1><span id="current-hp"></span></div></div>
+  <div class="ammo-panel"><div class="ammo-label">BĂNG <b id="round">01</b><span id="ammo-total">/ 06 VIÊN</span></div><div class="ammo-counts"><span><b id="live-count">?</b> THẬT</span><span><b id="blank-count">?</b> LÉP</span></div><div class="ammo-strip" id="ammo-strip" aria-label="Thứ tự đạn được giữ bí mật"></div><div id="weapon-state">SÁT THƯƠNG / 01 HP</div></div>
+  <p class="scene-hint" id="scene-hint"></p>
+  <div id="scene-tooltip" role="status" hidden></div>
+  <section class="terminal" id="terminal" aria-label="Terminal điều khiển bàn chơi">
+    <div class="terminal-bar"><span>PHYSICS TERMINAL <i>//</i> <span id="terminal-status">CHỜ MC</span></span><button id="hud-toggle" aria-expanded="true" aria-controls="terminal-content">THU GỌN ▾</button></div>
+    <div class="terminal-content" id="terminal-content"><section id="quiz" class="quiz" aria-labelledby="question-title"></section><div id="item-shortcuts" class="item-shortcuts" aria-label="Vật phẩm của tổ đang đến lượt"></div></div>
+  </section>
+  <aside class="journal" id="journal" aria-label="Nhật ký sự kiện" hidden><div class="journal-head"><h2>NHẬT KÝ BÀN CHƠI</h2><span id="event-count">TRỰC TIẾP</span></div><ol id="events" class="events"></ol></aside>
+  <div class="sr-only" id="crew-summary" aria-live="polite"></div>
+</div>
+<dialog id="rules" aria-labelledby="rules-title">
+  <div class="dialog-head">
+    <h2 id="rules-title">Luật trên bàn chơi</h2>
+    <button class="close" id="rules-close" aria-label="Đóng hướng dẫn">Đóng ✕</button>
+  </div>
+  <p>MC đọc câu hỏi và bấm A / B / C / D để ghi nhận đáp án. Mỗi tổ có 3 HP, tối đa 4 vật phẩm. Tổ 1 luôn đi trước; sau đó theo thứ tự 1 → 2 → 3 → 4.</p>
+
+  <h3>Trả lời đúng</h3>
+  <p>Nhận 1 vật phẩm ngẫu nhiên nếu kho chưa đầy. Có thể dùng vật phẩm, rồi chọn mục tiêu và bấm KHAI HỎA. Tự bắn gặp đạn lép: giữ lượt. Mọi trường hợp khác: kết thúc lượt.</p>
+
+  <h3>Trả lời sai</h3>
+  <p>Tự bắn ngay, không dùng vật phẩm. Đạn thật trừ 1 HP, đạn lép không mất HP. Luôn kết thúc lượt.</p>
+
+  <h3>Vật phẩm — chỉ dùng sau khi trả lời đúng</h3>
+  <div class="item-rule"><strong>Kính lúp</strong><span>Xem viên đạn hiện tại. Bỏ viên đó bằng bia thì thông tin hết hiệu lực.</span></div>
+  <div class="item-rule"><strong>Thuốc lá</strong><span>Hồi 1 HP. Không thể dùng nếu đã đủ 3 HP.</span></div>
+  <div class="item-rule"><strong>Cưa tay</strong><span>Phát bắn kế tiếp gây 2 sát thương nếu là đạn thật. Hết hiệu lực sau một phát, kể cả đạn lép. Bia không tiêu thụ hiệu lực cưa.</span></div>
+  <div class="item-rule"><strong>Chai bia</strong><span>Bỏ viên đạn hiện tại, không mất HP và không kết thúc lượt. Nếu hết đạn, nạp băng mới rồi tiếp tục chọn mục tiêu.</span></div>
+  <div class="item-rule"><strong>Còng tay</strong><span>Tổ còn sống kế tiếp theo vòng bỏ qua đúng một lượt kế tiếp. Không cộng dồn nếu tổ đó đã bị còng.</span></div>
+
+  <h3>Nạp đạn & chiến thắng</h3>
+  <p>Mọi băng đạn, kể cả băng đầu tiên, đều có đúng 6 viên: ngẫu nhiên 2–4 đạn thật, số còn lại là đạn lép. Thứ tự luôn được xáo trộn. Số đạn còn lại công khai; thứ tự bí mật. Tổ 0 HP bị loại. Tổ sống cuối cùng chiến thắng.</p>
+  <p>Kính lúp hiển thị kết quả công khai. Di chuột hoặc đưa tiêu điểm đến vật phẩm để xem tên và lý do có thể / chưa thể dùng. Có thể bấm phím A–D khi nhận đáp án. CHƠI LẠI đặt lại toàn bộ trạng thái và bắt đầu ván mới.</p>
+</dialog>
+<noscript>Trò chơi cần JavaScript và WebGL 2. Hãy bật JavaScript và tăng tốc phần cứng.</noscript>
+<script type="module" src="./game.js"></script>
+</body>
+</html>

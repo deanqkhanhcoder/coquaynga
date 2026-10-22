@@ -1,0 +1,51 @@
+{
+  "browser": "msedge",
+  "scope": "rendering and interaction smoke test; victory uses render fixture",
+  "timing": "original production phase durations",
+  "date": "2026-10-22T06:28:44.378Z",
+  "checks": [
+    {
+      "name": "WebGL room, physical gun, four fixed seats",
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "calls": 117,
+      "position": [
+        0,
+        1.4273580202097627,
+        0.28
+      ],
+      "geometries": 80,
+      "textures": 13
+    },
+    {
+      "name": "four items through real HUD buttons; peek/heal/saw/beer rules"
+    },
+    {
+      "name": "3D raycast selects correct team and barrel aims at its world position",
+      "dot": 0.9874404411099906
+    },
+    {
+      "name": "live shot, two HP saw damage, next team, animation sequence"
+    },
+    {
+      "name": "victory scene spot light and winning seat highlight (render fixture)"
+    },
+    {
+      "name": "play-again on final scene"
+    },
+    {
+      "name": "responsive layout with all four answers",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "responsive layout with all four answers",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "no console, page or resource errors"
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

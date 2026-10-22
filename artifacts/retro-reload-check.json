@@ -1,0 +1,10 @@
+{
+  "pose": {
+    "gun": 0.854064402825075,
+    "platter": 1.97914705410439,
+    "phase": "reload"
+  },
+  "returnedToQuestion": true,
+  "clearedGunRotation": true,
+  "errors": []
+}

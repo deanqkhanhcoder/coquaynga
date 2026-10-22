@@ -1,0 +1,324 @@
+{
+  "browser": "chrome",
+  "date": "2026-10-22T07:37:38.530Z",
+  "timing": "original production delays",
+  "checks": [
+    {
+      "name": "engine, 31 questions, original audio, shader and Netlify hashes unchanged",
+      "engineFile": "d47ed5f4b7953ed5efdfe81088a859b28e42cc544ffd5fcf15a9adb82ad6ec0c",
+      "engine": "ebd95aec5c51648037181257861f7e837aad21153c1e4931a4a4ae5324868a4a",
+      "questions": "0f48cb34f31d7b3b4a4389fe22722ecbda2ce12920fe80bb1067701c2b6cccb8",
+      "originalAudio": "25f2376ab7ffc1a3cc57c3dd0155393c8475552a849cf12812e4d2a19dc6a7f9",
+      "shaderFile": "b724d6b18945198d698f1bd5f0f9ad3fc8e6e62bf87ef2d47d392344d3283885",
+      "netlifyFile": "4b76bf4faeb12791a340eb651b9cb233876c0a47b03ae38f479eb5f5f964f5cc"
+    },
+    {
+      "name": "all 31 questions and four complete answers fit Full HD without scrolling; crisp DOM typography",
+      "sizes": {
+        "question": 44,
+        "answers": 32,
+        "letters": 36,
+        "names": 36,
+        "hp": 27.9936,
+        "turn": 37.9968,
+        "controls": 25.9968,
+        "journal": 22
+      },
+      "longest": {
+        "index": 15,
+        "characters": 221,
+        "height": 439,
+        "scroll": 0,
+        "complete": true
+      },
+      "maxPanelHeight": 439
+    },
+    {
+      "name": "four independent camera anchors face their fixed masks; 100 mm clearance on all 16 sampled routes",
+      "collisions": [],
+      "front": [
+        {
+          "id": 0,
+          "dot": 0.9981026553161461,
+          "distance": 2.36644894440301
+        },
+        {
+          "id": 1,
+          "dot": 0.9991184610145071,
+          "distance": 2.4369454684708463
+        },
+        {
+          "id": 2,
+          "dot": 0.9975390733233315,
+          "distance": 2.369749707728563
+        },
+        {
+          "id": 3,
+          "dot": 0.9994355464166094,
+          "distance": 2.440573188868807
+        }
+      ]
+    },
+    {
+      "name": "TỔ 1",
+      "id": 0,
+      "error": 0,
+      "face": [
+        0.0003579441737576922,
+        0.31117511129524744,
+        0.953218816405609
+      ],
+      "labelVisible": true,
+      "active": true,
+      "labelError": 0.006132816686058553,
+      "headVisible": true,
+      "labelBottom": 160.671875,
+      "headerBottom": 73.1875,
+      "faceY": 371.96543990056637,
+      "hudTop": 644.25
+    },
+    {
+      "name": "TỔ 2",
+      "id": 1,
+      "error": 2.7755575615628914e-17,
+      "face": [
+        -0.0002367368531090722,
+        0.30490301849588203,
+        0.9547702184315521
+      ],
+      "labelVisible": true,
+      "active": true,
+      "labelError": 0.0009029633864316972,
+      "headVisible": true,
+      "labelBottom": 171.375,
+      "headerBottom": 73.1875,
+      "faceY": 375.3523700122237,
+      "hudTop": 644.25
+    },
+    {
+      "name": "TỔ 3",
+      "id": 2,
+      "error": 0,
+      "face": [
+        -0.00040745229369926975,
+        0.3201072373287971,
+        0.9532371187355194
+      ],
+      "labelVisible": true,
+      "active": true,
+      "labelError": 0.005642512456443258,
+      "headVisible": true,
+      "labelBottom": 155.5,
+      "headerBottom": 73.1875,
+      "faceY": 367.1420918424496,
+      "hudTop": 644.25
+    },
+    {
+      "name": "TỔ 4",
+      "id": 3,
+      "error": 4.163336342344337e-17,
+      "face": [
+        -0.0001891040776430681,
+        0.30016048372081755,
+        0.9548618483226876
+      ],
+      "labelVisible": true,
+      "active": true,
+      "labelError": 0.00470291441190809,
+      "headVisible": true,
+      "labelBottom": 174.59375,
+      "headerBottom": 73.1875,
+      "faceY": 377.9133387907585,
+      "hudTop": 644.25
+    },
+    {
+      "name": "1000 ms smoothstep translation, shortest quaternion arc, safe replacement; 100 HUD renders never restart move",
+      "from": [
+        -0.72,
+        2.7,
+        0.09999999999999998
+      ],
+      "to": [
+        0.72,
+        2.72,
+        0.12
+      ],
+      "duration": 1000,
+      "samples": [
+        {
+          "p": 0,
+          "position": [
+            -0.72,
+            2.7,
+            0.09999999999999998
+          ],
+          "rotation": [
+            -0.15806598685879614,
+            0.6480580931742163,
+            0.13999016496697586,
+            0.7317367049576456
+          ]
+        },
+        {
+          "p": 0.25,
+          "position": [
+            -0.495,
+            2.703125,
+            0.10312499999999998
+          ],
+          "rotation": [
+            -0.1859568312829558,
+            0.4678542485896864,
+            0.10055101225424148,
+            0.8581503090429029
+          ]
+        },
+        {
+          "p": 0.5,
+          "position": [
+            0,
+            2.71,
+            0.10999999999999999
+          ],
+          "rotation": [
+            -0.2127907311884758,
+            0.002406453108284745,
+            -0.0009937786217325828,
+            0.9770943281524884
+          ]
+        },
+        {
+          "p": 0.75,
+          "position": [
+            0.4949999999999999,
+            2.7168750000000004,
+            0.11687499999999999
+          ],
+          "rotation": [
+            -0.18816742055801122,
+            -0.46362327262706343,
+            -0.10229825322321928,
+            0.8597566808734866
+          ]
+        },
+        {
+          "p": 1,
+          "position": [
+            0.72,
+            2.72,
+            0.12
+          ],
+          "rotation": [
+            -0.1611333724102269,
+            -0.6444482635261614,
+            -0.14148089483824702,
+            0.7339656860709438
+          ]
+        }
+      ],
+      "before": [
+        0.545315,
+        2.725635,
+        -0.09976499999999996
+      ],
+      "after": [
+        0.545315,
+        2.725635,
+        -0.09976499999999996
+      ],
+      "count": 8,
+      "afterRenders": 8
+    },
+    {
+      "name": "two real rounds follow 1 → 2 → 3 → 4; trigger/shot never steal camera",
+      "turns": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "cuffs skip Tổ 2; opposite-seat transition goes directly to Tổ 3"
+    },
+    {
+      "name": "eliminated seat is skipped; camera follows next living team"
+    },
+    {
+      "name": "five restarts replace transitions; four models, seats, names and one renderer retain identity"
+    },
+    {
+      "name": "browser question 31 wraps to original question 1"
+    },
+    {
+      "name": "responsive, all four answers reachable without clipped text",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "overflow": false,
+      "scrollable": false,
+      "seen": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "responsive, all four answers reachable without clipped text",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        1280,
+        720
+      ],
+      "overflow": false,
+      "scrollable": false,
+      "seen": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "responsive, all four answers reachable without clipped text",
+      "viewport": [
+        390,
+        844
+      ],
+      "canvas": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "scrollable": true,
+      "seen": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "fullscreen and static-server WebGL: zero JS, console, shader, HTTP or resource errors"
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "limits": [
+    "No physical 5 metre projection or speaker listening test.",
+    "Software WebGL; no hardware FPS benchmark."
+  ]
+}

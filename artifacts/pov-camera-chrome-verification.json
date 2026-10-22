@@ -1,0 +1,767 @@
+{
+  "browser": "chrome",
+  "scope": "seat POV, typography and real game turns",
+  "date": "2026-10-22T08:07:35.610Z",
+  "timing": "original production delays",
+  "checks": [
+    {
+      "name": "engine, 31 questions, original audio, shader and Netlify hashes unchanged",
+      "engineFile": "d47ed5f4b7953ed5efdfe81088a859b28e42cc544ffd5fcf15a9adb82ad6ec0c",
+      "engine": "ebd95aec5c51648037181257861f7e837aad21153c1e4931a4a4ae5324868a4a",
+      "questions": "0f48cb34f31d7b3b4a4389fe22722ecbda2ce12920fe80bb1067701c2b6cccb8",
+      "originalAudio": "25f2376ab7ffc1a3cc57c3dd0155393c8475552a849cf12812e4d2a19dc6a7f9",
+      "shaderFile": "b724d6b18945198d698f1bd5f0f9ad3fc8e6e62bf87ef2d47d392344d3283885",
+      "netlifyFile": "4b76bf4faeb12791a340eb651b9cb233876c0a47b03ae38f479eb5f5f964f5cc"
+    },
+    {
+      "name": "all 31 questions and four complete answers fit Full HD without scrolling; crisp DOM typography",
+      "sizes": {
+        "question": 44,
+        "answers": 32,
+        "letters": 36,
+        "names": 36,
+        "hp": 27.9936,
+        "turn": 37.9968,
+        "controls": 25.9968,
+        "journal": 22
+      },
+      "longest": {
+        "index": 15,
+        "characters": 221,
+        "height": 439,
+        "scroll": 0,
+        "complete": true
+      },
+      "maxPanelHeight": 439
+    },
+    {
+      "name": "seat-local eye anchors point into table; 100 mm clearance on 16 curved routes with standing/slumped models",
+      "collisions": [],
+      "foreignHidden": [],
+      "anchors": [
+        {
+          "id": 0,
+          "local": [
+            2.9582283945787943e-31,
+            2.32,
+            0
+          ],
+          "look": [
+            -4.440892098500626e-16,
+            1.2,
+            5.828670879282072e-16
+          ],
+          "radius": 3.025359482772254
+        },
+        {
+          "id": 1,
+          "local": [
+            0,
+            2.32,
+            0.040000000000000036
+          ],
+          "look": [
+            0,
+            1.2,
+            0
+          ],
+          "radius": 3
+        },
+        {
+          "id": 2,
+          "local": [
+            -2.9582283945787943e-31,
+            2.32,
+            0
+          ],
+          "look": [
+            4.440892098500626e-16,
+            1.2,
+            5.828670879282072e-16
+          ],
+          "radius": 3.025359482772254
+        },
+        {
+          "id": 3,
+          "local": [
+            -4.930380657631324e-32,
+            2.32,
+            0.040000000000000036
+          ],
+          "look": [
+            -3.722926269407954e-16,
+            1.2,
+            0
+          ],
+          "radius": 3
+        }
+      ]
+    },
+    {
+      "name": "seat 1 POV: own face hidden, opposite player visible, entire gun above HUD",
+      "id": 0,
+      "position": [
+        -3.02,
+        2.32,
+        -0.18
+      ],
+      "look": [
+        -4.440892098500626e-16,
+        1.2,
+        5.828670879282072e-16
+      ],
+      "error": 0,
+      "ownBodyHidden": true,
+      "ownNameHidden": true,
+      "oppositeVisible": true,
+      "labels": [
+        {
+          "id": 2,
+          "name": "TỔ 3",
+          "error": 0.001599887153361549
+        }
+      ],
+      "gun": {
+        "left": 870.8469141910396,
+        "right": 1014.322415895087,
+        "top": 376.6372226284689,
+        "bottom": 553.3839047344375
+      },
+      "hudTop": 644.25
+    },
+    {
+      "name": "seat 2 POV: own face hidden, opposite player visible, entire gun above HUD",
+      "id": 1,
+      "position": [
+        0,
+        2.32,
+        -3
+      ],
+      "look": [
+        0,
+        1.2,
+        0
+      ],
+      "error": 0,
+      "ownBodyHidden": true,
+      "ownNameHidden": true,
+      "oppositeVisible": true,
+      "labels": [
+        {
+          "id": 3,
+          "name": "TỔ 4",
+          "error": 0.003846697515660361
+        }
+      ],
+      "gun": {
+        "left": 699.3347321695403,
+        "right": 1265.529020014446,
+        "top": 402.53674248567336,
+        "bottom": 507.8086779488456
+      },
+      "hudTop": 644.25
+    },
+    {
+      "name": "seat 3 POV: own face hidden, opposite player visible, entire gun above HUD",
+      "id": 2,
+      "position": [
+        3.02,
+        2.32,
+        -0.18
+      ],
+      "look": [
+        4.440892098500626e-16,
+        1.2,
+        5.828670879282072e-16
+      ],
+      "error": 0,
+      "ownBodyHidden": true,
+      "ownNameHidden": true,
+      "oppositeVisible": true,
+      "labels": [
+        {
+          "id": 0,
+          "name": "TỔ 1",
+          "error": 0.002515111889173876
+        }
+      ],
+      "gun": {
+        "left": 821.6827544380346,
+        "right": 1033.4105940327288,
+        "top": 372.9043461142227,
+        "bottom": 593.807692867409
+      },
+      "hudTop": 644.25
+    },
+    {
+      "name": "seat 4 POV: own face hidden, opposite player visible, entire gun above HUD",
+      "id": 3,
+      "position": [
+        -4.898587196589413e-18,
+        2.32,
+        3
+      ],
+      "look": [
+        -3.7229262694079534e-16,
+        1.2,
+        0
+      ],
+      "error": 0,
+      "ownBodyHidden": true,
+      "ownNameHidden": true,
+      "oppositeVisible": true,
+      "labels": [
+        {
+          "id": 1,
+          "name": "TỔ 2",
+          "error": 0.002623885659963541
+        }
+      ],
+      "gun": {
+        "left": 690.6539528614211,
+        "right": 1247.307094355639,
+        "top": 401.8767946174698,
+        "bottom": 515.118584579168
+      },
+      "hudTop": 644.25
+    },
+    {
+      "name": "1000 ms eased curved move keeps table focus, safe replacement; 100 HUD renders never restart move",
+      "from": [
+        -3.02,
+        2.32,
+        -0.18
+      ],
+      "to": [
+        3.02,
+        2.32,
+        -0.18
+      ],
+      "duration": 1000,
+      "samples": [
+        {
+          "p": 0,
+          "position": [
+            -3.02,
+            2.32,
+            -0.17999999999999997
+          ],
+          "radius": 3.025359482772254,
+          "focusDot": 0.9999999999999999
+        },
+        {
+          "p": 0.25,
+          "position": [
+            -2.1809319097495,
+            2.532128531571699,
+            -1.28313065565633
+          ],
+          "radius": 2.530392909104956,
+          "focusDot": 0.9999999999999999
+        },
+        {
+          "p": 0.5,
+          "position": [
+            -2.419117667742412e-16,
+            2.77,
+            -1.975359482772254
+          ],
+          "radius": 1.975359482772254,
+          "focusDot": 1.0000000000000002
+        },
+        {
+          "p": 0.75,
+          "position": [
+            2.1809319097495004,
+            2.532128531571699,
+            -1.2831306556563284
+          ],
+          "radius": 2.5303929091049557,
+          "focusDot": 1.0000000000000002
+        },
+        {
+          "p": 1,
+          "position": [
+            3.02,
+            2.32,
+            -0.18
+          ],
+          "radius": 3.025359482772254,
+          "focusDot": 0.9999999999999999
+        }
+      ],
+      "before": [
+        1.9661122641611644,
+        2.5890373224936267,
+        -1.0369384357783615
+      ],
+      "after": [
+        1.9661122641611644,
+        2.5890373224936267,
+        -1.0369384357783615
+      ],
+      "count": 41,
+      "afterRenders": 41
+    },
+    {
+      "name": "two real rounds follow 1 → 2 → 3 → 4; trigger/shot never steal camera",
+      "turns": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "cuffs skip Tổ 2; opposite-seat transition goes directly to Tổ 3"
+    },
+    {
+      "name": "eliminated seat is skipped; camera follows next living team"
+    },
+    {
+      "name": "five restarts replace transitions; four models, seats, names and one renderer retain identity"
+    },
+    {
+      "name": "browser question 31 wraps to original question 1"
+    },
+    {
+      "name": "responsive, all four answers reachable without clipped text",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "overflow": false,
+      "scrollable": false,
+      "seen": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "responsive, all four answers reachable without clipped text",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        1280,
+        720
+      ],
+      "overflow": false,
+      "scrollable": false,
+      "seen": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "responsive, all four answers reachable without clipped text",
+      "viewport": [
+        390,
+        844
+      ],
+      "canvas": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "scrollable": true,
+      "seen": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "enlarged tooltip remains inside viewport even at bottom-right pointer",
+      "left": 31,
+      "top": 767.40625,
+      "right": 382,
+      "bottom": 836,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "fullscreen and static-server WebGL: zero JS, console, shader, HTTP or resource errors"
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "limits": [
+    "No physical 5 metre projection or speaker listening test.",
+    "Software WebGL; no hardware FPS benchmark."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "browser": "msedge",
+  "scope": "interaction/rendering smoke check",
+  "timing": "original production delays",
+  "date": "2026-10-22T06:58:52.210Z",
+  "checks": [
+    {
+      "name": "full viewport POV, four physical CRTs, inventory slots, low-res custom shader pipeline",
+      "fov": 64,
+      "canvas": [
+        1440,
+        900
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "buffer": [
+        960,
+        600
+      ],
+      "monitors": 4,
+      "slots": 16,
+      "seats": 4,
+      "passes": [
+        "RenderPass",
+        "OutputPass",
+        "ShaderPass"
+      ],
+      "geometries": 121,
+      "textures": 18,
+      "calls": 274
+    },
+    {
+      "name": "compact question terminal, four original answers, no 2D HP/inventory cards",
+      "height": 219.90625
+    },
+    {
+      "name": "real 3D inventory raycast, silhouette highlight and correct slot reindex after use"
+    },
+    {
+      "name": "magnifier, cigarette, saw and beer preserve original rules through compact shortcuts"
+    },
+    {
+      "name": "mask raycast selects fixed team and both gun/turntable turn toward it",
+      "rotor": 6.374928351225008
+    },
+    {
+      "name": "live recoil/flash, CRT HP update and automatic terminal collapse during actions"
+    },
+    {
+      "name": "all original audio nodes and added friction respect mute"
+    },
+    {
+      "name": "graphics, journal, full rules and fullscreen controls"
+    },
+    {
+      "name": "full viewport responsive layout and all four answer controls",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "name": "full viewport responsive layout and all four answer controls",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "zero shader compile, JS, console, HTTP or resource errors"
+    }
+  ],
+  "errors": [],
+  "failed": []
+}
