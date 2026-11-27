@@ -35,6 +35,7 @@ export class GameScene {
     this.pointer=new THREE.Vector2();this.raycaster=new THREE.Raycaster();
     this.up=new THREE.Vector3(0,1,0);this.aimPoint=new THREE.Vector3();this.aimMatrix=new THREE.Matrix4();
     this.targetQuaternion=new THREE.Quaternion();this.muzzlePosition=new THREE.Vector3();this.spentOrigin=new THREE.Vector3();
+    this.bloodOrigin=new THREE.Vector3();this.bloodDir=new THREE.Vector3();
     this.renderer=new THREE.WebGLRenderer({antialias:false,powerPreference:'high-performance'});
     this.renderer.outputColorSpace=THREE.SRGBColorSpace;
     this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.04;
@@ -46,7 +47,7 @@ export class GameScene {
     this.scene=new THREE.Scene();this.scene.fog=new THREE.FogExp2(0x090303,.045);
     this.camera=new THREE.PerspectiveCamera(88,1,.06,24);
     this.camera.position.set(0,2.32,3);this.cameraLook=new THREE.Vector3(0,1.2,0);this.camera.lookAt(this.cameraLook);
-    this.cameraSeat=null;this.cameraTransition=null;this.cameraTransitions=0;
+    this.cameraSeat=null;this.cameraTransition=null;this.cameraTransitions=0;this.lastCameraStyle=-1;
     this.labelPoint=new THREE.Vector3();this.labelView=new THREE.Vector3();this.visibleLabels=[];
     const pmrem=new THREE.PMREMGenerator(this.renderer),roomEnv=new RoomEnvironment();
     this.envTarget=pmrem.fromScene(roomEnv,.06);this.scene.environment=this.envTarget.texture;this.scene.environmentIntensity=.18;
@@ -250,7 +251,7 @@ export class GameScene {
     for(const z of [-1.22,1.22]){cx.beginPath();cx.moveTo(px(-2.2),pz(z));cx.lineTo(px(2.2),pz(z));cx.stroke();}
     cx.save();cx.translate(px(-1.42),pz(1.05));cx.rotate(-Math.PI/2);cx.fillStyle='#d9ceb16b';cx.font='bold 21px monospace';cx.fillText('DO NOT CROSS',-90,0);cx.restore();
     cx.fillStyle='#ddd3b370';cx.font='bold 19px monospace';cx.fillText('12 GA // AUTHORIZED USE ONLY',px(-1.2),pz(-1.08));
-    cx.font='bold 14px monospace';cx.fillText('PROPERTY OF THE HOUSE / 04',px(-1.03),pz(2.12));
+    cx.font='bold 14px monospace';cx.fillText('BUCKSHOT ROULETTE',px(-1.03),pz(2.12));
     for(let i=0;i<600;i++){const x=this.rand()*1024,y=this.rand()*1024;cx.strokeStyle=i%3?'#100a0780':'#d5c3a13b';cx.lineWidth=1;cx.beginPath();cx.moveTo(x,y);cx.lineTo(x+this.rand()*45,y+this.rand()*8-4);cx.stroke();}
     return this.canvasTexture(c);
   }
@@ -363,7 +364,12 @@ export class GameScene {
       const cameraMount=new THREE.Object3D();cameraMount.position.fromArray(view.eye);root.add(cameraMount);
       const cameraPosition=cameraMount.getWorldPosition(new THREE.Vector3());
       const localFocus=new THREE.Vector3(0,view.focusHeight,Math.hypot(x,z));
-      const seat={id,root,body,head,hands,cuffs,outline,headAnchor,label,health,hit:0,dead:false,
+      const bloodSplatter=new THREE.Group();bloodSplatter.visible=false;root.add(bloodSplatter);
+      const bloodMat=this.material({color:0x680706,roughness:.18,metalness:.2});
+      for(const [bx,bz,br] of [[-.18,1.15,.16],[.14,1.28,.12],[.01,1.02,.095],[-.29,1.34,.065],[.26,1.08,.07]]){
+        const drop=this.cyl(br,br,.005,bloodMat,bloodSplatter,bx,1.217,bz,14);drop.castShadow=false;
+      }
+      const seat={id,root,body,head,hands,cuffs,outline,headAnchor,label,health,bloodSplatter,hit:0,dead:false,
         aim:new THREE.Vector3(x,id===3?2.65:2.2,z),
         cameraAnchor:{mount:cameraMount,localFocus,position:cameraPosition,look:root.localToWorld(localFocus.clone())},
         indicator:this.monitors[id].indicator,ring:this.monitors[id].ring};
@@ -502,6 +508,9 @@ export class GameScene {
     const smokeGeo=new THREE.BufferGeometry();this.smokePositions=new Float32Array(24*3);smokeGeo.setAttribute('position',new THREE.BufferAttribute(this.smokePositions,3));this.extraGeometry.push(smokeGeo);
     const smokeMat=new THREE.PointsMaterial({color:0x9e9785,size:.055,transparent:true,opacity:0,depthWrite:false});this.materials.push(smokeMat);this.smoke=new THREE.Points(smokeGeo,smokeMat);this.smoke.visible=false;this.scene.add(this.smoke);
     this.smokeOffsets=Array.from({length:24},()=>new THREE.Vector3(this.rand()-.5,this.rand(),this.rand()-.5));
+    const bloodGeo=new THREE.BufferGeometry();this.bloodPositions=new Float32Array(56*3);bloodGeo.setAttribute('position',new THREE.BufferAttribute(this.bloodPositions,3));this.extraGeometry.push(bloodGeo);
+    const bloodMat=new THREE.PointsMaterial({color:0x9e0b09,size:.068,transparent:true,opacity:0,depthWrite:false});this.materials.push(bloodMat);this.blood=new THREE.Points(bloodGeo,bloodMat);this.blood.visible=false;this.scene.add(this.blood);
+    this.bloodVelocities=Array.from({length:56},()=>new THREE.Vector3((this.rand()-.5)*2.1,.75+this.rand()*1.75,(this.rand()-.5)*2.1));
   }
   makeLights(){
     this.scene.add(new THREE.HemisphereLight(0xc1b99e,0x2b1714,.6));
@@ -549,7 +558,7 @@ export class GameScene {
     this.box(.035,.032,.075,m.steel,this.trigger,0,-.11,.045,.009);
     for(let z of [-1.29,.04])this.box(.028,.06,.045,m.steel,g,0,.15,z,.006);
     for(let z of [.05,.34])for(let x of [-.12,.12]){const pin=this.cyl(.018,.018,.006,m.steel,g,x,.005,z,12);pin.rotation.z=Math.PI/2;}
-    const engraving=this.textPanel('12 GA','BUCKSHOT / 04',.25,.074);engraving.position.set(-.125,.02,.19);engraving.rotation.y=-Math.PI/2;g.add(engraving);
+    const engraving=this.textPanel('12 GA','BUCKSHOT',.25,.074);engraving.position.set(-.125,.02,.19);engraving.rotation.y=-Math.PI/2;g.add(engraving);
     this.gun.rotation.y=1.18;
     this.muzzle=new THREE.Object3D();this.muzzle.position.set(0,.065,-1.46);g.add(this.muzzle);
     this.flashMaterial=new THREE.MeshBasicMaterial({color:0xffdb91,transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending});this.materials.push(this.flashMaterial);
@@ -586,7 +595,8 @@ export class GameScene {
     const now=performance.now();this.availability=availability;
     if(epoch!==this.epoch){
       this.epoch=epoch;this.previous=null;this.soundTarget=null;
-      this.itemAt=-10000;this.spent.visible=false;this.smoke.visible=false;this.flash.visible=false;
+      this.itemAt=-10000;this.spent.visible=false;this.smoke.visible=false;this.flash.visible=false;this.blood.visible=false;
+      for(const seat of this.seats)seat.bloodSplatter.visible=false;
       this.clearHover();
       this.cameraSeat=null;this.cameraTransition=null;
     }
@@ -596,6 +606,12 @@ export class GameScene {
       if(s.phase==='shot'){
         this.gun.updateMatrixWorld(true);this.weapon.getWorldPosition(this.spentOrigin);this.spentOrigin.y+=.04;
         this.muzzle.getWorldPosition(this.muzzlePosition);this.seats[s.shot.target].hit=now;
+        if(s.shot.live){
+          const targetSeat=this.seats[s.shot.target];
+          this.bloodOrigin.copy(targetSeat.aim).setY(1.98);
+          this.bloodDir.subVectors(this.bloodOrigin,this.muzzlePosition).setY(0).normalize();
+          targetSeat.bloodSplatter.visible=true;
+        }
       }
       this.previous=s.phase;
     }
@@ -625,7 +641,7 @@ export class GameScene {
     }
     this.clearHover();
     const hint=document.getElementById('scene-hint');
-    hint.textContent=s.phase==='target'?'NHẤP VẬT PHẨM ĐỂ DÙNG · NHẤP MẶT NẠ / CRT ĐỂ NHẮM':s.phase==='question'?'MC CHỌN A / B / C / D':s.phase==='aiming'?'MỤC TIÊU ĐÃ KHÓA':s.phase==='won'?'THE HOUSE HAS A WINNER':'';
+    hint.textContent=s.phase==='target'?'NHẤP VẬT PHẨM ĐỂ DÙNG · NHẤP MẶT NẠ / CRT ĐỂ NHẮM':s.phase==='question'?'MC CHỌN A / B / C / D':s.phase==='aiming'?'MỤC TIÊU ĐÃ KHÓA':s.phase==='won'?'ĐÃ CÓ TỔ CHIẾN THẮNG':'';
   }
   focusSeat(id,now){
     const anchor=this.seats[id].cameraAnchor;
@@ -633,27 +649,61 @@ export class GameScene {
     this.seats[id].root.localToWorld(anchor.look.copy(anchor.localFocus));
     const from=this.camera.position.clone(),to=anchor.position.clone();
     const fromAngle=Math.atan2(from.x,from.z),toAngle=Math.atan2(to.x,to.z);
-    const angle=Math.atan2(Math.sin(toAngle-fromAngle),Math.cos(toAngle-fromAngle));
+    let angle=Math.atan2(Math.sin(toAngle-fromAngle),Math.cos(toAngle-fromAngle));
+    // Pick a varied Passing-the-POV style so transitions feel alive and unpredictable.
+    let style=Math.floor(this.rand()*4);
+    if(style===this.lastCameraStyle)style=(style+1+Math.floor(this.rand()*3))%4;
+    this.lastCameraStyle=style;
+    const styleName=['skim','overhead','orbit','whip'][style];
+    if(Math.abs(Math.abs(angle)-Math.PI)<.25&&this.rand()<.5)angle=-angle;
+    if(styleName==='orbit'&&Math.abs(angle)<2.1&&Math.abs(angle)>.2)angle=angle>0?angle-Math.PI*2:angle+Math.PI*2;
+    const duration=styleName==='orbit'?2900:styleName==='overhead'?2600:styleName==='whip'?2100:2400;
+    const rollSign=this.rand()<.5?-1:1;
     this.cameraSeat=id;this.cameraTransitions++;
     // Snapshot both endpoints once; HUD renders and target changes cannot restart this move.
-    this.cameraTransition={start:now,duration:this.reduced?0:2600,
+    this.cameraTransition={start:now,duration,style:styleName,rollSign,
       from,to,fromLook:this.cameraLook.clone(),toLook:anchor.look.clone(),
       fromAngle,angle,fromRadius:Math.hypot(from.x,from.z),toRadius:Math.hypot(to.x,to.z)};
   }
   updateCamera(now,shake,elapsed){
     const move=this.cameraTransition;
+    let roll=0;
     if(move){
       const progress=move.duration?THREE.MathUtils.clamp((now-move.start)/move.duration,0,1):1;
-      // Smootherstep gives zero velocity and acceleration at both ends of the slow dolly.
-      const eased=progress*progress*progress*(progress*(progress*6-15)+10);
-      // Bend inside the seat ring rather than passing through an intermediate player's head.
-      // Stay away from the centre so opposite-seat moves never pitch vertically into the gun.
+      // Smootherstep gives zero velocity and acceleration at both ends of the slow Passing-the-POV glide.
+      let eased=progress*progress*progress*(progress*(progress*6-15)+10);
+      if(move.style==='whip')eased=THREE.MathUtils.clamp(eased+Math.sin(progress*Math.PI*2)*.06,0,1);
       const arc=Math.sin(Math.PI*eased),angle=move.fromAngle+move.angle*eased;
-      const radius=Math.max(1.95,THREE.MathUtils.lerp(move.fromRadius,move.toRadius,eased)-Math.min(1.05,Math.abs(move.angle)*.68)*arc);
-      this.camera.position.set(Math.sin(angle)*radius,THREE.MathUtils.lerp(move.from.y,move.to.y,eased)+Math.min(.45,Math.abs(move.angle)*.23)*arc,Math.cos(angle)*radius);
-      this.cameraLook.lerpVectors(move.fromLook,move.toLook,eased);
-      if(progress===1)this.camera.position.copy(move.to);
-      if(progress===1)this.cameraTransition=null;
+      let radius=Math.max(2.05,THREE.MathUtils.lerp(move.fromRadius,move.toRadius,eased)-Math.min(1.0,Math.abs(move.angle)*.58)*arc);
+      let height=THREE.MathUtils.lerp(move.from.y,move.to.y,eased)+Math.min(.42,Math.abs(move.angle)*.2)*arc;
+      let midLookY=1.25;
+      if(move.style==='skim'){
+        radius=Math.max(2.15,THREE.MathUtils.lerp(move.fromRadius,move.toRadius,eased)-.72*arc);
+        height=THREE.MathUtils.lerp(move.from.y,move.to.y,eased)-.64*arc;
+        midLookY=1.48;
+        roll=move.rollSign*.085*arc;
+      }else if(move.style==='overhead'){
+        radius=THREE.MathUtils.lerp(move.fromRadius,move.toRadius,eased)-.48*arc;
+        height=THREE.MathUtils.lerp(move.from.y,move.to.y,eased)+.92*arc;
+        midLookY=1.18;
+        roll=move.rollSign*.045*arc;
+      }else if(move.style==='orbit'){
+        radius=THREE.MathUtils.lerp(move.fromRadius,move.toRadius,eased)+.26*arc;
+        height=THREE.MathUtils.lerp(move.from.y,move.to.y,eased)+.38*arc;
+        midLookY=1.32;
+        roll=move.rollSign*.065*arc;
+      }else{
+        midLookY=1.50;
+        roll=move.rollSign*.075*Math.sin(progress*Math.PI);
+      }
+      this.camera.position.set(Math.sin(angle)*radius,height,Math.cos(angle)*radius);
+      const inv=1-eased;
+      this.cameraLook.set(
+        inv*inv*move.fromLook.x+eased*eased*move.toLook.x,
+        inv*inv*move.fromLook.y+2*inv*eased*midLookY+eased*eased*move.toLook.y,
+        inv*inv*move.fromLook.z+eased*eased*move.toLook.z
+      );
+      if(progress===1){this.camera.position.copy(move.to);this.cameraLook.copy(move.toLook);this.cameraTransition=null;roll=0;}
     }else if(this.cameraSeat!==null){
       this.camera.position.copy(this.seats[this.cameraSeat].cameraAnchor.position);
       this.cameraLook.copy(this.seats[this.cameraSeat].cameraAnchor.look);
@@ -662,9 +712,9 @@ export class GameScene {
     this.camera.position.x+=Math.sin(elapsed*107)*shake;
     this.camera.position.y+=Math.cos(elapsed*91)*shake;
     this.camera.lookAt(this.cameraLook);
+    if(roll)this.camera.rotateZ(roll);
     this.camera.updateMatrixWorld(true);
     // First-person clipping guard, including the departing seat during an interrupted move.
-    // Models stay in the scene and return as soon as the camera leaves their head volume.
     for(const seat of this.seats){
       seat.head.getWorldPosition(this.labelPoint);
       seat.body.visible=seat.id!==this.cameraSeat&&this.camera.position.distanceToSquared(this.labelPoint)>.85*.85&&this.camera.position.distanceToSquared(seat.cameraAnchor.position)>.85*.85;
@@ -739,7 +789,7 @@ export class GameScene {
   tick(){
     if(this.destroyed||this.hidden)return;
     this.frame=requestAnimationFrame(this.tick);const now=performance.now();
-    if(now-this.lastRender<(this.quality==='low'?1000/30:1000/45)-1)return;
+    if(this.quality==='low'&&now-this.lastRender<(1000/30)-1)return;
     const dt=Math.max(0,Math.min(.25,(now-this.lastTime)/1000));this.lastTime=now;this.lastRender=now;
     this.update(now,dt);this.renderer.info.reset();this.composer.render(dt);
     if(this.qualityMode==='auto'&&this.quality==='high'){
@@ -789,6 +839,16 @@ export class GameScene {
       for(let i=0;i<24;i++){const a=this.smokeOffsets[i];this.smokePositions[i*3]=this.muzzlePosition.x+a.x*(.05+elapsed*.26);this.smokePositions[i*3+1]=this.muzzlePosition.y+elapsed*.25+a.y*elapsed*.3;this.smokePositions[i*3+2]=this.muzzlePosition.z+a.z*(.06+elapsed*.3);}
       this.smoke.geometry.attributes.position.needsUpdate=true;this.smoke.material.opacity=.19*(1-elapsed/1.8);
     }
+    this.blood.visible=live&&elapsed<1.6;
+    if(this.blood.visible){
+      for(let i=0;i<56;i++){
+        const v=this.bloodVelocities[i];
+        this.bloodPositions[i*3]=this.bloodOrigin.x+(v.x+this.bloodDir.x*1.9)*elapsed;
+        this.bloodPositions[i*3+1]=Math.max(1.22,this.bloodOrigin.y+v.y*elapsed-2.8*elapsed*elapsed);
+        this.bloodPositions[i*3+2]=this.bloodOrigin.z+(v.z+this.bloodDir.z*1.9)*elapsed;
+      }
+      this.blood.geometry.attributes.position.needsUpdate=true;this.blood.material.opacity=.95*(1-elapsed/1.6);
+    }
     this.shells.forEach((shell,i)=>{
       shell.position.set(-.45+i*.18,1.26,-1.47);shell.rotation.set(Math.PI/2,0,.15);
       shell.visible=s.phase==='idle'||i<s.ammo.length;
@@ -809,7 +869,7 @@ export class GameScene {
       seat.head.rotation.z=seat.dead?.23:breath*.8;
       seat.hands.position.y=impact*(live?.09:.01);
     });
-    const motion=this.reduced?0:1,shake=live?Math.exp(-elapsed*13)*.028*motion:0;
+    const motion=this.reduced?0:1,shake=live?Math.exp(-elapsed*11)*.048*motion:0;
     this.updateCamera(now,shake,elapsed);this.updateLabels();
     const won=s.phase==='won';
     this.key.target.position.x=THREE.MathUtils.lerp(this.key.target.position.x,won?SEAT_POSITIONS[s.winner][0]*.55:0,ease*.5);

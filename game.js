@@ -284,6 +284,7 @@ function render(){
   const remaining=started?s.ammo.length:6;
 
   document.querySelector('.app').dataset.phase=s.phase;
+  document.querySelector('.app').dataset.liveHit=s.phase==='shot'&&s.shot?.live?'1':'0';
   renderItems();
   $('terminal-status').textContent=s.phase==='question'?`CÂU ${s.questionCount} / TỔ ${s.current+1}`:({idle:'CHỜ MC',verdict:s.correct?'CHÍNH XÁC':'CHƯA ĐÚNG',target:'CHỌN MỤC TIÊU',item:'ĐANG DÙNG VẬT PHẨM',reload:'ĐANG NẠP ĐẠN',aiming:'ĐANG BÓP CÒ',shot:s.shot?.live?'ĐẠN THẬT':'ĐẠN LÉP',eject:'ĐÃ BỎ MỘT VIÊN',won:`TỔ ${s.winner+1} CHIẾN THẮNG`})[s.phase];
   $('restart').disabled=!started||!world;
@@ -331,7 +332,7 @@ function render(){
     overlay=`
       <div class="scene-banner">
         <div class="eyebrow">BUCKSHOT ROULETTE</div>
-        <h2>THE HOUSE IS READY.</h2><p>4 tổ · 3 HP · 6 viên đạn · không có đường lùi</p>
+        <h2>BÀN CHƠI SẴN SÀNG</h2><p>4 tổ · 3 HP · 6 viên đạn · không có đường lùi</p>
         <button class="primary" id="start">BẮT ĐẦU ▸</button>
       </div>`;
   }
@@ -692,5 +693,5 @@ $('journal-toggle').addEventListener('click',()=>{
 $('hud-toggle').addEventListener('click',()=>{
   const collapsed=$('terminal').classList.toggle('collapsed');
   $('hud-toggle').setAttribute('aria-expanded',String(!collapsed));
-  $('hud-toggle').textContent=collapsed?'MỞ TERMINAL ▴':'THU GỌN ▾';
+  $('hud-toggle').textContent=collapsed?'MỞ BẢNG ▴':'THU GỌN ▾';
 });

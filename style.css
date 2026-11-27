@@ -83,3 +83,23 @@ dialog{width:min(1000px,calc(100vw - 28px));font:clamp(19px,1.354vw,26px)/1.5 'G
  .scene-message{top:auto;bottom:10%;font-size:26px;padding:12px 18px}.scene-message small{font-size:21px}.scene-banner{bottom:10%;padding:18px;min-width:0}.scene-banner h2{font-size:30px}.scene-banner p{font-size:20px}.scene-banner .eyebrow{font-size:17px}.primary{font-size:25px}.scene-hint{font-size:16px;bottom:58px}
  .journal{top:210px;right:8px;width:calc(100vw - 16px);max-width:none;height:45vh;padding:14px}.journal-head h2{font-size:18px}.events li{font-size:19px}.item-rule{grid-template-columns:1fr;gap:0}
 }
+.desk::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:8;opacity:0;background:radial-gradient(circle,rgba(120,8,8,.16) 28%,rgba(165,10,10,.76) 100%)}
+.app[data-live-hit="1"] .desk::after{animation:blood-vignette 1.15s ease-out forwards}
+@keyframes blood-vignette{0%{opacity:1}15%{opacity:.95}100%{opacity:0}}
+
+/* Right-side HUD layout: keeps the entire 3D table and all 4 characters unobstructed on the left. */
+@media(min-width:901px){
+  .ammo-panel{left:22px;right:auto;top:auto;bottom:18px;text-align:left;max-width:320px}
+  .ammo-counts,.ammo-strip{justify-content:flex-start}
+  .journal{left:22px;right:auto;top:210px;width:400px}
+  .terminal{top:72px;right:16px;bottom:16px;left:auto;transform:none;width:clamp(340px,33vw,520px);max-width:none;display:flex;flex-direction:column}
+  .terminal.collapsed,.app:is([data-phase=aiming],[data-phase=shot],[data-phase=reload],[data-phase=eject],[data-phase=item]) .terminal{bottom:auto}
+  .terminal-content{flex:1;max-height:none;overflow:auto}
+  .choices{grid-template-columns:1fr}
+  .choice{min-height:62px}
+  .target-area{flex-direction:column}
+  .targets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .fire{width:100%}
+  .app:not([data-phase=idle]):not([data-phase=won]) #scene-overlay{right:clamp(356px,34vw,536px)}
+  .app:not([data-phase=idle]):not([data-phase=won]) .scene-hint{left:calc(50% - clamp(178px,17vw,268px));max-width:56%}
+}
