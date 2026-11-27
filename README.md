@@ -1,5 +1,5 @@
 # Buckshot Roulette — Retro Industrial Horror
-
+**Demo :** coquaynga.netlify.app.
 Game trình duyệt tĩnh, Three.js **0.170.0**, không có bước build, backend hoặc dependency cần cài khi deploy.
 
 ## Chạy tại máy
